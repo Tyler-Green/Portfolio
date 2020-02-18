@@ -1,0 +1,23 @@
+/* This program contains two errors, on line 13 the variable b has not been
+declared and on line 20 a call expression with return type void is being added
+to an integer.
+The output should be "Row: 15 Col: 12 Symbol b is undeclared"
+                     "Row: 15 Col: 8 Cannot add type UNKNOWN to type INT"
+                     "Row: 15 Col: 12 Cannot assign type UNKNOWN to type INT"
+                     "Row: 22 Col: 8 Cannot add type VOID to type INT"
+                     "Row: 22 Col: 18" Cannot assign type UNKNOWN to type INT*/
+
+
+void print(void){
+  /*if there was a print function this would print the result*/
+  int sum;
+  int a;
+  sum = a + b;
+}
+
+void main(void){
+  int a;
+  int sum;
+  a = 2+3;
+  sum = a + print();
+}

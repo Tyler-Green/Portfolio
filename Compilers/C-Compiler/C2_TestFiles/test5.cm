@@ -1,0 +1,23 @@
+/* This program contains three errors, on line 12 there is a comparison between
+ a void and an int and on line 11 varibale sum has been used where it has not 
+ been declared and on line 12 variable sum is used again without being declared.
+The output should be "Row: 4, Col: 5 Symbol sum is undeclared
+											Row: 5, Col: 5 Cannot add type INT to type UNKNOWN
+											Row: 5, Col: 11 Cannot add type INT to type UNKNOWN
+											Row: 5, Col: 15 Cannot assign type UNKNOWN to type INT
+											Row: 5, Col: 2 Symbol sum is undeclared
+											Row: 6, Col: 12 Cannot assign type INT to type UNKNOWN
+											Row: 12, Col: 15 Cannot compare type INT to type VOID*/
+
+void print(int a, int b){
+	b = sum + a + b;
+  sum = a + b;
+}
+
+void main(void){
+  int a;
+  int b;
+  while (print() < 7){
+    print(1,2);
+  }
+}

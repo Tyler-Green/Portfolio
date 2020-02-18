@@ -1,0 +1,10 @@
+/* This program has one error, on line 9 there is an incorrect return type
+The output should be "Row: 9 Col: 2 Function main requires return type VOID but INT was found" */
+
+int x[10];
+
+void main(void){
+  int a;
+  a = 1+2;
+  return a;
+}

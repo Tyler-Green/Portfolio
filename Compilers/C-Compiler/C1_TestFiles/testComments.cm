@@ -1,0 +1,17 @@
+/* This program contains one error, a close brace is missing before line 12
+This shows off the systems attempt to repair and continue parsing
+The output should be "Error on line 12, column 1"*/
+
+/* A program to perform Euclid's
+   algorithm to compute a gcd */
+
+int gcd(int u, int v) {
+  if (v == 0) return u;
+  else return gcd(v, u - u/v*v);
+}
+void main(void) { /*if (v < 3)*/
+  int x; int y;
+  x = input();
+  y = input();
+  output(gcd(x, y));
+}

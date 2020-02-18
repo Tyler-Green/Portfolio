@@ -1,0 +1,22 @@
+/* This program contains three errors, on line 12 there is an invalid array declaration,
+ on line 15 there is an invalid assign statement, and on line 21 there is an invalid
+ argument in a call statement. This file shows the programs ability to continue parsing
+ the files, even after it has encountered errors.
+ The output should be "Error on line 12, column 11
+                       Error on line 15, column 7
+                       Error on line 21, column 14 */
+
+/* A program to compute the factorial value of an input */
+
+void main(void) {
+  void x[3<a];
+  int fac;
+  x = input();
+  fac var = 1;
+
+  while (x > 1) {
+    fac = fac * x;
+    x = x - 1;
+  }
+  output(fac > 7);
+}

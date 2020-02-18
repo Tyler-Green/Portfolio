@@ -1,0 +1,19 @@
+/* This program contains two errors, the function call on
+line 17 has three arguments instead of two and the on line 18 the function sub
+is being called but has not been declared.
+The output should be "Row: 17 Col: 6 Incorrect number of arguments for function add"
+                     "Row: 18 Col: 6 Function sub is undeclared"
+                     "Row: 18 Col: 13 Cannot assign type UNKNOWN to type INT" */
+
+int add(int a, int b){
+  int sum;
+  sum = a + b;
+  return sum;
+}
+
+void main(void){
+  int a;
+  int b;
+  a = add(1,2,3);
+  b = sub(2,1);
+}
