@@ -1,0 +1,35 @@
+@import url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
+
+.login-container {
+    background-image: url("https://ak0.picdn.net/shutterstock/videos/3991060/thumb/10.jpg");
+    background-size: cover;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.heading {
+    font-family: 'Montserrat', sans-serif;
+    /* background-color: rgba(0, 0, 0, 0.45); */
+    color: #fff;
+    font-weight: 20; 
+    margin: 0;
+    padding-top: 90px;
+}
+
+.btn-container{
+    margin: auto;
+}
+
+.login-btn{
+    margin-top: 20px;
+    min-width: 200px;
+}
+.login-btn:hover{
+    background-color: lightgray;
+}
+
+.google-icon {
+    max-width: 25px;
+    max-height: 25px;
+    float: left;
+}

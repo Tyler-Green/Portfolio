@@ -1,0 +1,32 @@
+<div class="split left">
+  <div class="split top">
+    <app-stock-graph></app-stock-graph>
+  </div>
+  <div class="split bottom">
+    <app-stock-symbols></app-stock-symbols>
+  </div>
+</div>
+
+<div class="split right">
+  <div class="split top">
+    <div *ngIf="isAdmin">
+      <div class="pull-right">
+        <button type="button" class="btn btn-outline-primary" routerLink="/settings">
+          Settings
+        </button>
+      
+        <button type="button" class="btn btn-outline-primary" (click)="logout()">
+          Logout
+        </button>
+      </div>
+    </div>
+    <app-hot-or-not></app-hot-or-not>
+  </div>
+  <div class="split bottom">
+    <app-tweets></app-tweets>
+  </div>
+</div>
+
+<div class="footer">
+  <app-news></app-news>
+</div>

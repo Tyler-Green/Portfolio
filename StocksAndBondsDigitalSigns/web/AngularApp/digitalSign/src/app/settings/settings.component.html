@@ -1,0 +1,30 @@
+<div class="setting-container">
+  <h1 class="text-center">Settings</h1>
+  <hr>
+  <div class="shared-url center">
+    <label for="shared-url">Shared-URL:</label>
+    <div class="input-group">
+      <input id="shared-url" type="text" class="form-control" value={{sharedLink}} aria-label="..." readonly>
+      <span (click)="copyUrl()" class="copy-btn input-group-addon"><i class="far fa-copy"></i></span>
+    </div>
+  </div>
+  <div class="input-container center">
+    <label>Twitter Hastag(s)</label>
+    <hr>
+    <app-twitter-tags></app-twitter-tags>
+
+    <br><br>
+    <label>News Keyword(s)</label>
+    <hr>
+    <app-news-keys></app-news-keys>
+
+    <br><br>
+    <label>Bookmarked Stock(s)</label>
+    <hr>
+    <app-saved-stocks></app-saved-stocks>
+
+  </div>
+
+</div>
+<div class="save-container"><button class="btn btn-lg save-btn" routerLink="/home">Home</button></div>
+

@@ -1,0 +1,18 @@
+
+<div class="input-group">
+  <span class="input-group-addon" id="hashtagSymbol"><i class="fab fa-slack-hash"></i></span>
+  <input [(ngModel)]="hashtag" type="text" class="form-control" placeholder="Enter a hashtag" aria-describedby="hashtagSymbol">
+  <span (click)="addHashtag()" class="add-btn input-group-addon">ADD</span> 
+</div>
+
+<div id="hashtag-list">
+    <div *ngFor="let post of posts;">
+
+      <div class="row tag-row">
+        <div class="col-xs-4 tag-item"><input [value]="true" [ngModel]="post.isChecked" (click)="updateSelection(post.postID, post.isChecked)" type="checkbox" name="checkbox"/></div>
+        <div class="col-xs-4 tag-item"><p class="text-center">{{post.tag}}</p></div>
+        <div class="col-xs-4 tag-item"><button class="delete-btn" (click)="deleteHashtag(post.postID)"><i class="far fa-trash-alt"></i></button></div>
+      </div>
+
+    </div>
+</div>

@@ -1,0 +1,41 @@
+.add-btn:hover {
+    cursor: pointer;
+    background-color: lightgreen;
+}
+
+.delete-btn {
+    float: right;
+    background-color: aliceblue;
+    color: red;
+}
+
+#bookmark-list {
+    padding: 10px;
+}
+
+.bookmark-row {
+    border: 1px solid lightgray;
+    padding: 3px;
+    margin: 2px;
+    border-radius: 2px;
+}
+
+.bookmark-item {
+    padding-top: 8px;
+    padding-bottom: 4px;
+}
+
+.ui-autocomplete {
+    max-height: 100px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+    /* add padding to account for vertical scrollbar */
+    padding-right: 20px;
+ }
+ /* IE 6 doesn’t support max-height
+ * we use height instead, but this forces the menu to always be this tall
+ */
+ * html .ui-autocomplete {
+    height: 100px;
+ }

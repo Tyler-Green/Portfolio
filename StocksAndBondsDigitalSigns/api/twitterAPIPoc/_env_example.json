@@ -1,0 +1,8 @@
+{
+  "TweetRecieverFunction": {
+    "TWITTER_CONSUMER_KEY": "1234",
+    "TWITTER_CONSUMER_SECRET": "1234",
+    "TWITTER_TOKEN": "1234",
+    "TWITTER_TOKEN_SECRET": "1234"
+  }
+}

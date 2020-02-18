@@ -1,0 +1,47 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<div class="container hot-not-cards">
+  <div  *ngFor="let stock of stocks; let i = index;">
+    <div *ngIf="i < 6">
+      <div class="col-sm-4">
+        <ng-container *ngIf="stock.change > 0; else negative">
+          <div class="card border-success mb-3">
+            <div class="card-header"><h2>{{ (stock.companyName.length>16)? (stock.companyName | slice:0:14)+'...':(stock.companyName) }}</h2></div>
+            <div class="card-body">
+              <h3 class="card-title">{{stock.latestPrice}}</h3>
+              <h4 class="text-success">{{stock.change}} ({{stock.changePercent*100 | number:'1.1-4'}}%)</h4>
+              <p class="card-text text-secondary">As of {{stock.latestTime}}</p>
+            </div>
+          </div>
+        </ng-container>
+        <ng-template #negative>
+          <ng-container *ngIf="stock.change < 0; else neutral">
+            <div class="card border-danger mb-3">
+              <div class="card-header"><h2>{{ (stock.companyName.length>16)? (stock.companyName | slice:0:14)+'...':(stock.companyName) }}</h2></div>
+              <div class="card-body">
+                <h3 class="card-title">{{stock.latestPrice}}</h3>
+                <h4 class="text-danger" >{{stock.change}} ({{stock.changePercent*100 | number:'1.1-4'}}%)</h4>
+                <p class="card-text text-secondary">As of {{stock.latestTime}}</p>
+              </div>
+            </div>
+          </ng-container>
+        </ng-template>
+        <ng-template #neutral>
+          <ng-container *ngIf="stock.change == 0">
+            <div class="card border-secondary mb-3">
+              <div class="card-header"><h2>{{ (stock.companyName.length>16)? (stock.companyName | slice:0:14)+'...':(stock.companyName) }}</h2></div>
+              <div class="card-body">
+                <h3 class="card-title">{{stock.latestPrice}}</h3>
+                <h4 class="text-secondary" >{{stock.change}} ({{stock.changePercent*100 | number:'1.1-4'}}%)</h4>
+                <p class="card-text text-secondary">As of {{stock.latestTime}}</p>
+              </div>
+            </div>
+          </ng-container>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+

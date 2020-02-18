@@ -1,0 +1,28 @@
+<div id="twitter-feed">
+
+  <div *ngFor="let tweet of tweets;">
+    <div class="tweetEntry" *ngIf="tweet.user">
+
+      <div class="tweetEntry-content">
+        <a class="tweetEntry-account-group" href="">
+          <img class="tweetEntry-avatar" src="{{tweet.user.profile_image_url}}">
+          <strong class="tweetEntry-fullname">{{tweet.user.displayName}}</strong>
+          <span class="tweetEntry-username"><b> {{tweet.user.screen_name}}</b></span>
+          <span class="tweetEntry-timestamp"> - {{tweet.created_at | date}}</span>
+        </a>
+
+        <div class="tweetEntry-text-container">
+          {{tweet.full_text}}
+        </div>
+      </div>
+
+      <div class="tweetEntry-action-list">
+        <i class="fa fa-reply" style="width: 80px;"></i>
+        <i class="fa fa-retweet" style="width: 80px"></i>
+        <i class="fa fa-heart" style="width: 80px"></i>
+      </div>
+
+    </div>
+  </div>
+
+</div>

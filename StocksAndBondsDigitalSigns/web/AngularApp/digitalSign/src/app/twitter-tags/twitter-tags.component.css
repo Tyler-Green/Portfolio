@@ -1,0 +1,26 @@
+.add-btn:hover {
+    cursor: pointer;
+    background-color: lightgreen;
+}
+
+.delete-btn {
+    float: right;
+    background-color: aliceblue;
+    color: red;
+}
+
+#hashtag-list {
+    padding: 10px;
+}
+
+.tag-row {
+    border: 1px solid lightgray;
+    padding: 3px;
+    margin: 2px;
+    border-radius: 2px;
+}
+
+.tag-item {
+    padding-top: 8px;
+    padding-bottom: 4px;
+}

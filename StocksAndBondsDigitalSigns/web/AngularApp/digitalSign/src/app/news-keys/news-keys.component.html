@@ -1,0 +1,17 @@
+<div class="input-group">
+  <span class="input-group-addon" id="newsKey-1"><i class="fas fa-key"></i></span>
+  <input [(ngModel)]="newsKey" type="text" class="form-control" placeholder="Keyword" aria-describedby="newsKey-1">
+  <span (click)="addNewsKey()" class="add-btn input-group-addon">ADD</span>
+</div>
+
+<div id="newsKey-list">
+  <div *ngFor="let key of keys;">
+
+    <div class="row key-row">
+      <div class="col-xs-4 key-item"></div>
+      <div class="col-xs-4 key-item"><p class="text-center">{{key.key}}</p></div>
+      <div class="col-xs-4 key-item"><button class="delete-btn" (click)="deleteNewsKey(key.postID)"><i class="far fa-trash-alt"></i></button></div>
+    </div>
+
+  </div>
+</div>

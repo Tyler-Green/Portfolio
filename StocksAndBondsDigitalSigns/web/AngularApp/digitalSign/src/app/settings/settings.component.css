@@ -1,0 +1,37 @@
+.center {
+    margin: auto;
+    width: 50%;
+}
+
+.shared-url {
+    width: 40%;
+}
+
+.setting-container {
+    height: 100%;
+}
+
+.copy-btn:hover {
+    cursor: pointer;
+    background-color: lightgreen;
+}
+
+.input-container {
+    margin-top: 50px; 
+}
+
+hr {
+    margin-top: 0px;
+}
+
+.save-container{
+    padding: 20px;
+    position: sticky;
+    bottom: 0;
+    margin-right: 75px;
+    float: right;
+}
+
+.save-btn {
+    background-color: lightgray;
+}

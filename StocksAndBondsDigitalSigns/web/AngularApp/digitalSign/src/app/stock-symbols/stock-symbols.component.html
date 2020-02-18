@@ -1,0 +1,14 @@
+<div id="stock-symbols">
+    <div *ngFor="let bookmark of bookmarks;">
+        <div class="row bookmark-card text-center">
+            <div class="col-xs-6">
+                <h1>{{bookmark.symbol}}</h1>
+                <h3>{{bookmark.companyName}}</h3>
+            </div>
+            <div class="col-xs-6">
+                <h1>{{bookmark.latestPrice}} USD</h1>
+                <h3 style="font-size:24px; font-weight: normal;">{{bookmark.change}} %</h3>
+            </div>
+        </div>
+    </div>
+</div>

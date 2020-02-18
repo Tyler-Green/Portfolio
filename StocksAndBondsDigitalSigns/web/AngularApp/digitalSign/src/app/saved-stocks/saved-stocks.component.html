@@ -1,0 +1,18 @@
+<div class="form-group">
+  <input id="bookmark-input" type="text" class="form-control" aria-label="...">
+</div><!-- /input-group -->
+
+
+<div id="bookmark-list">
+  <div *ngFor="let bookmark of bookmarks;">
+
+    <div class="row bookmark-row">
+      <div class="col-xs-4 bookmark-item"></div>
+      <div class="col-xs-4 bookmark-item">
+        <p class="text-center">{{bookmark.fullStockName}}</p>
+      </div>
+      <div class="col-xs-4 bookmark-item"><button class="delete-btn" (click)="deleteBookmark(bookmark.postID)"><i class="far fa-trash-alt"></i></button></div>
+    </div>
+
+  </div>
+</div>

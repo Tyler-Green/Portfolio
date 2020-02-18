@@ -1,0 +1,30 @@
+# Note:
+#   I'm not actually using this for deployment.
+#   This is only to be used for local development/testing.
+#   use `sam local start-api` to start
+#     - Jordan
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  sam-app
+
+  A SAM template to be used for local development/testing 
+
+Globals:
+  Function:
+    Timeout: 3 # We shouldn't ever go past this. (For $ reasons mostly)
+
+# If you want another function just define it here
+Resources:
+  StockConnectionFunctionality:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: .
+      Handler: NewsConnection.lambdaHandler
+      Runtime: nodejs8.10
+      Events:
+        StockRecieverAPI:
+          Type: Api
+          Properties:
+            Path: /news
+            Method: get

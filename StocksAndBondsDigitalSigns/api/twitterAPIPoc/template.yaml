@@ -1,0 +1,38 @@
+# Note:
+#   I'm not actually using this for deployment.
+#   This is only to be used for local development/testing.
+#   use `sam local start-api` to start
+#     - Jordan
+
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  sam-app
+
+  A SAM template to be used for local development/testing 
+
+Globals:
+  Function:
+    Timeout: 3 # We shouldn't ever go past this. (For $ reasons mostly)
+
+# If you want another function just define it here
+Resources:
+  TweetRecieverFunctionality:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: tweet_reciever/
+      Handler: app.lambdaHandler
+      Runtime: nodejs8.10
+      Events:
+        TweetRecieverAPI:
+          Type: Api
+          Properties:
+            Path: /tweets
+            Method: get
+      # Loaded from .env.json at runtime
+      Environment:
+        Variables:
+          TWITTER_CONSUMER_KEY: "tvnHENUgQnKJDCmRGM8RTYUzR"
+          TWITTER_CONSUMER_SECRET: "4qksm4fYq5DRWldMPWx0LjNjRITuEDCj7cesNV6CQmtwWKmj9f"
+          TWITTER_TOKEN: "1042412278354604033-W9WjIgTye8DCRBG6o2UyWos0va9xxD"
+          TWITTER_TOKEN_SECRET: "c87iX5W5ssLJU06NIFfVTQvvp7Zf9Vmiug3LviB7SYqJl"
