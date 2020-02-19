@@ -27,7 +27,7 @@ type "java Main <flag> <filename>",
 	where <flag> is one of:
 		-a for abstract syntax tree
 		-s for symbol table (not yet implemented)
-		-c for compile with assembly output (not yet implemented)
+		-c for compile with assembly output
 	where <filename> is the name of the cm source file
 or
 type "java Main <filename> <flag>",
@@ -35,7 +35,7 @@ type "java Main <filename> <flag>",
 	where <flag> is one of:
 		-a for abstract syntax tree
 		-s for symbol table (not yet implemented)
-		-c for compile with assembly output (not yet implemented)
+		-c for compile with assembly output
 
 _____________________________________________
 
