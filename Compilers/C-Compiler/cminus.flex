@@ -119,4 +119,4 @@ id = [_a-zA-Z][_a-zA-Z0-9]*
 <YYINITIAL>.                     { return symbol(sym.ERROR); }
 <YYINITIAL>"/*"                  { yybegin(COMMENT); }
 <COMMENT>"*/"                    { yybegin(YYINITIAL); }
-<COMMENT>.|\n                    { /* skip comments */ }
+<COMMENT>[^]|\n                    { /* skip comments */ }

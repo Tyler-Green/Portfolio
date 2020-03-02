@@ -220,7 +220,7 @@ public class Assembler implements AssemblerVisitor {
   }
 
   public int visit( VarExp exp) {
-    return exp.var.accept(this);
+    return 0;
   }
 
   public int visit ( WhileExp exp) {
