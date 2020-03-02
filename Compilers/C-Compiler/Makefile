@@ -49,7 +49,7 @@ test_c3:
 	done
 
 clean:
-	rm -f parser.java Lexer.java sym.java *.class absyn/*.class symbol/*.class *~
+	rm -f parser.java Lexer.java sym.java *.class absyn/*.class symbol/*.class *~ Assembler/*.class
 
 test_clean:
 	rm -f C2_TestFiles/*.ast C2_TestFiles/*.smb C1_TestFiles/*.smb C3_TestFiles/*.tm
