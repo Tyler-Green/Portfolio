@@ -1,5 +1,5 @@
-JAVA=java.exe
-JAVAC=javac.exe
+JAVA=java
+JAVAC=javac
 JFLEX=jflex
 C1=C1_TestFiles
 C2=C2_TestFiles
@@ -52,4 +52,4 @@ clean:
 	rm -f parser.java Lexer.java sym.java *.class absyn/*.class symbol/*.class *~
 
 test_clean:
-	rm -f C2_TestFiles/*.ast C2_TestFiles/*.smb C1_TestFiles/*.smb C3_TestFiles/*.tm 
+	rm -f C2_TestFiles/*.ast C2_TestFiles/*.smb C1_TestFiles/*.smb C3_TestFiles/*.tm
