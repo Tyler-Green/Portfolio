@@ -1,14 +1,4 @@
-
-int func (int a) {
-if (a > 5){
-return a;
-}
-return func(a+1);
-}
-
 void main(void) {
   int b;
   b = 1;
-  output(func(b));
-
 }

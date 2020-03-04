@@ -13,13 +13,14 @@ public class Assembler implements AssemblerVisitor {
   private HashMap<String, Integer> functionMap;
 
   /* Registers */
-  static private final int AC1 = 1;
-  static private final int AC = 0;
-  static private final int VAL = 3;
-  static private final int ADR = 4;
-  static private final int FP = 5; // FP
-  static private final int GP = 6; // GP
-  static private final int PC = 7; // PC
+  static private final int AC = 0; //
+  static private final int AC1 = 1; //
+  static private final int STORE = 2; //
+  static private final int VAL = 3; //
+  static private final int ADR = 4; //
+  static private final int FP = 5; // Frame Pointer
+  static private final int GP = 6; // G P
+  static private final int PC = 7; // Program Counter
 
   public enum Operations {HALT, IN, OUT, ADD, SUB, MUL, DIV, LD, ST, LDA, LDC, JLT, JLE, JGT, JGE, JEQ, JNE;}
 
@@ -117,7 +118,7 @@ public class Assembler implements AssemblerVisitor {
       writeAsm(instructionCnt++, Operations.LDA, 7, lineNum - instructionCnt, 7, "jumping to function");
       checkPatchLine(temp, instructionCnt+1);
       writeAsm(instructionCnt++, Operations.LD, 5, 1, 5, "load old fp");
-      writeAsm(instructionCnt++, Operations.HALT, 0, 0, 0,"HALLTTTT");
+      writeAsm(instructionCnt++, Operations.HALT, 0, 0, 0,"Halt");
   }
 
   /* add assembly line to output StringBuilder */
