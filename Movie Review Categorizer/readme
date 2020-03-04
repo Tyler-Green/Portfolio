@@ -1,0 +1,12 @@
+the file ml.py is the project file to conduct both the analysis and the machine learning procedure.
+txt_sentoken and sub directories are the test files and processed files
+requirements.txt is the file of the packages used.
+
+to build
+download and extract the project
+navigate to the project directory
+create a new virtual env using the command: py -m venv env or python3 -m venv env
+Install the required packages outlined in requirements.txt
+type python ml.py <-a> <-f n>\\where -a will only conduct the analysis\\ -f n will run with n folds
+
+Testing was done on small scall project via manual calculations of the f values and some trust that the packages in scikit-learn and performing as they should be.
