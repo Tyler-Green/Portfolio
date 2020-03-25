@@ -1,0 +1,56 @@
+{
+  "vm_list": [
+    {
+      "provider":"AWS",
+      "id":"AWS Linux",
+      "image":"Amazon Linux",
+      "instance":"t2.micro",
+      "count":1,
+      "keyPair":"test",
+      "storage":
+          [],
+      "docker":
+        ["golang", "gcc"]
+    },
+    {
+      "provider":"AWS",
+      "id":"AWS Ubuntu",
+      "image":"Ubuntu",
+      "instance":"t2.micro",
+      "count":1,
+      "keyPair":"test",
+      "storage":
+          [],
+      "docker":
+        ["golang", "gcc"]
+    },
+    {
+        "provider":"Azure",
+        "id":"Azure Debian",
+        "name":"DebianVM",
+        "resource-group":"ass1",
+        "image":"Debian",
+        "user":"azureuser",
+        "password":"PasswordAzure1!",
+        "size":"Standard_B1ls",
+        "storage":
+          [],
+        "docker":
+          ["swift", "julia"]
+    },
+    {
+        "provider":"Azure",
+        "id":"Azure Ubuntu",
+        "name":"UbuntuVM",
+        "resource-group":"ass1",
+        "image":"Ubuntu",
+        "user":"azureuser",
+        "password":"PasswordAzure1!",
+        "size":"Standard_B1ls",
+        "storage":
+          [],
+        "docker":
+          ["swift", "julia"]
+    }
+  ]
+}
