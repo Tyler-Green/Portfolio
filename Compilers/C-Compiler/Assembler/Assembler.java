@@ -125,7 +125,12 @@ public class Assembler implements AssemblerVisitor {
   }
 
   public void visit( ArrayDec exp) {
-      //no further recursion
+      writeComment("Declaring Array: " + exp.ID);
+      writeComment("Array Size Of: " + exp.size);
+      varCnt-=exp.size;
+      addToScope(exp.ID, varCnt--);
+      writeAsm(instructionCnt++, Operations.LDC, VAL, exp.size, 0, "Load Array Size Into Reg[3]");
+      writeAsm(instructionCnt++, Operations.ST, VAL, varCnt, 5, "Storing Array Size");
   }
 
   public void visit( AssignExp exp) {
