@@ -15,7 +15,7 @@ public class Assembler implements AssemblerVisitor {
   static private final int AC = 0; // Arithmetic Operations
   static private final int AC1 = 1; // Arithmetic Operations
   static private final int STORE = 2; // Arithmetic Operations Value
-  static private final int VAL = 3; //
+  static private final int VARADR = 3; // Address Value For Variables
   static private final int ADR = 4; // For The Return Address
   static private final int FP = 5; // Frame Pointer
   static private final int GP = 6; // Global Pointer
@@ -129,8 +129,8 @@ public class Assembler implements AssemblerVisitor {
       writeComment("Array Size Of: " + exp.size);
       varCnt-=exp.size;
       addToScope(exp.ID, varCnt--);
-      writeAsm(instructionCnt++, Operations.LDC, VAL, exp.size, 0, "Load Array Size Into Reg[3]");
-      writeAsm(instructionCnt++, Operations.ST, VAL, varCnt, 5, "Storing Array Size");
+      writeAsm(instructionCnt++, Operations.LDC, STORE, exp.size, 0, "Load Array Size Into Reg[3]");
+      writeAsm(instructionCnt++, Operations.ST, STORE, varCnt, 5, "Storing Array Size");
   }
 
   public void visit( AssignExp exp) {
@@ -195,7 +195,7 @@ public class Assembler implements AssemblerVisitor {
 
   public void visit( IntExp exp) {
     writeComment("Int Exp");
-    //no further recursion
+    writeAsm(instructionCnt++, Operations.LDC, STORE, Integer.parseInt(exp.value), 0, "Loading Constant ("+exp.value+") To Reg[3]");
   }
 
   public void visit( OpExp exp) {
@@ -252,7 +252,13 @@ public class Assembler implements AssemblerVisitor {
 
   public void visit ( SimpleVarExp exp) {
     writeComment("Simple Var Exp");
-    //no further recursion
+    Integer[] vals = isDeclared(exp.name);
+    writeAsm(instructionCnt++, Operations.LDA, ADR, 0, FP, "Loading FP To Reg[5]");
+    for (int i = 0; i < vals[0] ; i++) {
+      writeAsm(instructionCnt++, Operations.LD, ADR, 0, ADR, "Loading Old FP To Reg[5]");
+    }
+    writeAsm(instructionCnt++, Operations.LDA, VARADR, vals[1], ADR, "Loading Variable Address To Reg[4]");
+    writeAsm(instructionCnt++, Operations.LD, STORE, 0, ADR, "Loading Varialble Value To Reg[3]");
   }
 
   public void visit ( IndexVarExp exp) {
