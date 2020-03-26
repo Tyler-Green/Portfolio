@@ -4,41 +4,41 @@ import absyn.*;
 
 public interface AssemblerVisitor {
 
-  public int visit( ArrayDec exp);
+  public void visit( ArrayDec exp);
 
-  public int visit( AssignExp exp);
+  public void visit( AssignExp exp);
 
-  public int visit( CallExp exp);
+  public void visit( CallExp exp);
 
-  public int visit( CompoundExp exp);
+  public void visit( CompoundExp exp);
 
-  public int visit( DecList decList);
+  public void visit( DecList decList);
 
-  public int visit( ExpList expList);
+  public void visit( ExpList expList);
 
-  public int visit ( FunctionDec exp);
+  public void visit ( FunctionDec exp);
 
-  public int visit( IfExp exp);
+  public void visit( IfExp exp);
 
-  public int visit( IntExp exp);
+  public void visit( IntExp exp);
 
-  public int visit( OpExp exp);
+  public void visit( OpExp exp);
 
-  public int visit( ReturnExp exp);
+  public void visit( ReturnExp exp);
 
-  public int visit( SimpleDec exp);
+  public void visit( SimpleDec exp);
 
-  public int visit( VarExp exp);
+  public void visit( VarExp exp);
 
-  public int visit ( WhileExp exp);
+  public void visit ( WhileExp exp);
 
-  public int visit ( SimpleVarExp exp);
+  public void visit ( SimpleVarExp exp);
 
-  public int visit ( IndexVarExp exp);
+  public void visit ( IndexVarExp exp);
 
-  public int visit ( NillExp exp);
+  public void visit ( NillExp exp);
 
-  public int visit ( TypeSpec exp);
+  public void visit ( TypeSpec exp);
 
-  public int visit( ExpList exp, int blah);
+  public void visit( ExpList exp, int blah);
 }

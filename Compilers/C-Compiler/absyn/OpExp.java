@@ -37,6 +37,6 @@ public class OpExp extends Exp {
   }
 
   public void accept( AssemblerVisitor visitor) {
-    return visitor.visit( this );
+    visitor.visit( this );
   }
 }

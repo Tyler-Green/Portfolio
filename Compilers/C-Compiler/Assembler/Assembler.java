@@ -91,6 +91,7 @@ public class Assembler implements AssemblerVisitor {
     "  9:    OUT  0,0,0 	output\n"+
     " 10:     LD  7,-1(5) 	return to caller\n"+
     "* End of standard prelude.");
+    writeComment("");
     stack = new ArrayList<APatchLine>();
     instructionCnt = 11;
     varCnt = 0;
@@ -102,8 +103,8 @@ public class Assembler implements AssemblerVisitor {
   }
 
   public void finale() {
-
-
+      writeComment("");
+      writeComment("Finale");
       String temp = "Call"+patchCount++;
       //move pc to reg 0
       writeAsm(instructionCnt++, Operations.LDA, 0, 0, 7, "PC stuff");
@@ -117,7 +118,7 @@ public class Assembler implements AssemblerVisitor {
       writeAsm(instructionCnt++, Operations.LDA, 5, varCnt-3, 5, "Updating FP");
       addScope();
       int lineNum = functionMap.get("main");
-      writeAsm(instructionCnt++, Operations.LDA, 7, lineNum - instructionCnt, 7, "jumping to function");
+      writeAsm(instructionCnt++, Operations.LDA, 7, lineNum - instructionCnt, 7, "Jumping To Function Main");
       checkPatchLine(temp, instructionCnt+1);
       writeAsm(instructionCnt++, Operations.LD, 5, 1, 5, "load old fp");
       writeAsm(instructionCnt++, Operations.HALT, 0, 0, 0,"Halt");
@@ -140,45 +141,71 @@ public class Assembler implements AssemblerVisitor {
   }
 
   public void visit( ArrayDec exp) {
+      //no further recursion
   }
 
   public void visit( AssignExp exp) {
     writeComment("Assign Exp");
+    exp.rhs.accept(this);
+    exp.lhs.accept(this);
   }
 
   public void visit( CallExp exp) {
     writeComment("Call Exp");
+    exp.args.accept(this);
   }
+
   public void visit( CompoundExp exp) {
+      exp.vars.accept(this);
+      if (exp.exps!=null) exp.exps.accept(this);
   }
+
   public void visit( DecList decList) {
+      while( decList != null ) {
+          decList.head.accept(this);
+          decList = decList.tail;
+      }
   }
-
   public void visit( ExpList expList) {
+      while( expList != null ) {
+          expList.head.accept(this);
+          expList = expList.tail;
+      }
   }
-
-  public void visit( ExpList expList, int blah) {
+  public void visit( ExpList expList, int value) {
+      while( expList != null ) {
+      expList.head.accept(this);
+      //not sure why i had this instruction
+      //writeAsm(instructionCnt++, Operations.ST, 3, --varCnt, 5, "add params");
+      expList = expList.tail;
+    }
   }
 
 
   public void visit ( FunctionDec exp) {
-      writeComment("Jump Around Function " + exp.ID); //need to be at backpatch after function declared
-
+      int startInstruction = instructionCnt++;
       writeComment("Function Declaration: " + exp.ID);
       functionMap.put(exp.ID, instructionCnt);
       addScope();
       writeAsm(instructionCnt++, Operations.ST, ADR, -1, FP, "Store The Return Address");
       if (exp.params!=null) exp.params.accept(this);
       if (exp.exps!=null) exp.exps.accept(this);
-      writeAsm(instructionCnt++, Operations.LD, PC, -1, FP, "Loading Return Address")
+      writeAsm(instructionCnt++, Operations.LD, PC, -1, FP, "Loading Return Address");
+      deleteScope();
+      writeComment("Jump Around Function " + exp.ID);
+      writeAsm(startInstruction, Operations.LDA, PC, instructionCnt-startInstruction-1, PC, "Jumping Around Function");
   }
 
   public void visit( IfExp exp) {
     writeComment("If Exp");
+    exp.ifpart.accept(this);
+    exp.thenpart.accept(this);
+    exp.elsepart.accept(this);
   }
 
   public void visit( IntExp exp) {
     writeComment("Int Exp");
+    //no further recursion
   }
 
   public void visit( OpExp exp) {
@@ -208,34 +235,46 @@ public class Assembler implements AssemblerVisitor {
         System.err.println("Something went wrong");
         break;
     }
+    exp.left.accept(this);
+    exp.right.accept(this);
     writeComment("End Op Exp");
   }
 
   public void visit( ReturnExp exp) {
     writeComment("Return exp");
+    exp.exp.accept(this);
   }
 
   public void visit( SimpleDec exp) {
+      //no further recursion
   }
 
   public void visit( VarExp exp) {
+      exp.var.accept(this);
   }
 
   public void visit ( WhileExp exp) {
     writeComment("While Exp");
+    exp.condition.accept(this);
+    exp.body.accept(this);
   }
 
   public void visit ( SimpleVarExp exp) {
     writeComment("Simple Var Exp");
+    //no further recursion
   }
 
   public void visit ( IndexVarExp exp) {
     writeComment("Index Var Exp");
+    exp.index.accept(this);
   }
 
   public void visit ( NillExp exp) {
     writeComment("Nil Exp");
+    //no further recursion
   }
 
-  public void visit ( TypeSpec exp) {r}
+  public void visit ( TypeSpec exp) {
+      //no further recursion
+  }
 }
