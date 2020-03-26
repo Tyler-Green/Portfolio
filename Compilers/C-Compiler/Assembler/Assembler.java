@@ -75,7 +75,6 @@ public class Assembler implements AssemblerVisitor {
     "  9:    OUT  0,0,0 	output\n"+
     " 10:     LD  7,-1(5) 	return to caller\n"+
     "* End of standard prelude.");
-    writeComment("");
     instructionCnt = 11;
     varCnt = 0;
     this.MapList = new ArrayList<HashMap<String,Integer>>();
@@ -168,6 +167,7 @@ public class Assembler implements AssemblerVisitor {
 
 
   public void visit ( FunctionDec exp) {
+      writeComment("");
       int startInstruction = instructionCnt++;
       writeComment("Function Declaration: " + exp.ID);
       functionMap.put(exp.ID, instructionCnt);
@@ -231,7 +231,8 @@ public class Assembler implements AssemblerVisitor {
   }
 
   public void visit( SimpleDec exp) {
-      //no further recursion
+      writeComment("Declaration Of: " + exp.ID);
+      addToScope(exp.ID, --varCnt);
   }
 
   public void visit( VarExp exp) {
