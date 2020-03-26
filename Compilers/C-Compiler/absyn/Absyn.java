@@ -8,5 +8,5 @@ abstract public class Absyn {
 
   abstract public void accept( AbsynVisitor visitor, int level );
   abstract public int accept( SemanticVisitor visitor);
-  abstract public int accept( AssemblerVisitor visitor);
+  abstract public void accept( AssemblerVisitor visitor);
 }

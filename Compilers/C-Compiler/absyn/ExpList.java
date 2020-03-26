@@ -24,7 +24,7 @@ public class ExpList extends Absyn {
     return visitor.visit( this );
   }
 
-  public int accept( AssemblerVisitor visitor, int blah) {
+  public void accept( AssemblerVisitor visitor, int blah) {
     return visitor.visit( this ,blah);
   }
 }

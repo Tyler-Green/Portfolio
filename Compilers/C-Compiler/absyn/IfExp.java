@@ -24,7 +24,7 @@ public class IfExp extends Exp {
     return visitor.visit( this );
   }
 
-  public int accept( AssemblerVisitor visitor) {
+  public void accept( AssemblerVisitor visitor) {
     return visitor.visit( this );
   }
 }

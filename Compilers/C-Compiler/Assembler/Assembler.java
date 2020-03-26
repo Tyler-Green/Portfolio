@@ -13,13 +13,13 @@ public class Assembler implements AssemblerVisitor {
   private HashMap<String, Integer> functionMap;
 
   /* Registers */
-  static private final int AC = 0; //
-  static private final int AC1 = 1; //
-  static private final int STORE = 2; //
+  static private final int AC = 0; // Arithmetic Operations
+  static private final int AC1 = 1; // Arithmetic Operations
+  static private final int STORE = 2; // Arithmetic Operations Value
   static private final int VAL = 3; //
-  static private final int ADR = 4; //
+  static private final int ADR = 4; // For The Return Address
   static private final int FP = 5; // Frame Pointer
-  static private final int GP = 6; // G P
+  static private final int GP = 6; // Global Pointer
   static private final int PC = 7; // Program Counter
 
   public enum Operations {HALT, IN, OUT, ADD, SUB, MUL, DIV, LD, ST, LDA, LDC, JLT, JLE, JGT, JGE, JEQ, JNE;}
@@ -41,6 +41,7 @@ public class Assembler implements AssemblerVisitor {
     }
   }
 
+  //Create a new level of scope
   public void addScope() {
     HashMap<String,Integer> newMap = new HashMap<String, Integer>();
     MapList.add(newMap);
@@ -57,6 +58,7 @@ public class Assembler implements AssemblerVisitor {
     MapList.remove(MapList.size()-1);
   }
 
+  //checks if a variable is declared and returns value for variable if it is
   public Integer[] isDeclared(String key) {
     int currentScope = MapList.size()-1;
     for (int i=currentScope; i>=0; i--) {
@@ -121,7 +123,7 @@ public class Assembler implements AssemblerVisitor {
       writeAsm(instructionCnt++, Operations.HALT, 0, 0, 0,"Halt");
   }
 
-  /* add assembly line to output StringBuilder */
+  /* add instruction line to output StringBuilder */
   private void writeAsm(int address, Operations oper, int r, int s, int t, String comment) {
     String addr = String.format("%1$3s", Integer.toString(address));
     String op = String.format("%1$6s", oper.name());
@@ -132,55 +134,54 @@ public class Assembler implements AssemblerVisitor {
       System.out.println(addr + ": " + op + "  " + r + "," + s + "(" + t + ")" + " \t"  +  comment);
     }
   }
-
+  /* add comment line to the output */
   private void writeComment(String comment) {
     System.out.println("* " + comment);
   }
 
-  public int visit( ArrayDec exp) {
-    return 2;
+  public void visit( ArrayDec exp) {
   }
 
-  public int visit( AssignExp exp) {
+  public void visit( AssignExp exp) {
     writeComment("Assign Exp");
-    return 0;
   }
 
-  public int visit( CallExp exp) {
+  public void visit( CallExp exp) {
     writeComment("Call Exp");
-    return 0;
   }
-  public int visit( CompoundExp exp) {
-    return 0;
+  public void visit( CompoundExp exp) {
   }
-  public int visit( DecList decList) {
-    return 0;
+  public void visit( DecList decList) {
   }
 
-  public int visit( ExpList expList) {
-    return 0;
+  public void visit( ExpList expList) {
   }
 
-  public int visit( ExpList expList, int blah) {
-    return 0;
+  public void visit( ExpList expList, int blah) {
   }
 
 
-  public int visit ( FunctionDec exp) {
-    return 0;
+  public void visit ( FunctionDec exp) {
+      writeComment("Jump Around Function " + exp.ID); //need to be at backpatch after function declared
+
+      writeComment("Function Declaration: " + exp.ID);
+      functionMap.put(exp.ID, instructionCnt);
+      addScope();
+      writeAsm(instructionCnt++, Operations.ST, ADR, -1, FP, "Store The Return Address");
+      if (exp.params!=null) exp.params.accept(this);
+      if (exp.exps!=null) exp.exps.accept(this);
+      writeAsm(instructionCnt++, Operations.LD, PC, -1, FP, "Loading Return Address")
   }
 
-  public int visit( IfExp exp) {
+  public void visit( IfExp exp) {
     writeComment("If Exp");
-    return 0;
   }
 
-  public int visit( IntExp exp) {
+  public void visit( IntExp exp) {
     writeComment("Int Exp");
-    return 0;
   }
 
-  public int visit( OpExp exp) {
+  public void visit( OpExp exp) {
     writeComment("Op Exp");
     switch (exp.op) {
       case OpExp.PLUS:
@@ -208,41 +209,33 @@ public class Assembler implements AssemblerVisitor {
         break;
     }
     writeComment("End Op Exp");
-    return 0;
   }
 
-  public int visit( ReturnExp exp) {
+  public void visit( ReturnExp exp) {
     writeComment("Return exp");
-    return 0;
   }
 
-  public int visit( SimpleDec exp) {
-    return 0;
+  public void visit( SimpleDec exp) {
   }
 
-  public int visit( VarExp exp) {
-    return 0;
+  public void visit( VarExp exp) {
   }
 
-  public int visit ( WhileExp exp) {
+  public void visit ( WhileExp exp) {
     writeComment("While Exp");
-    return 0;
   }
 
-  public int visit ( SimpleVarExp exp) {
+  public void visit ( SimpleVarExp exp) {
     writeComment("Simple Var Exp");
-    return 0;
   }
 
-  public int visit ( IndexVarExp exp) {
+  public void visit ( IndexVarExp exp) {
     writeComment("Index Var Exp");
-    return 0;
   }
 
-  public int visit ( NillExp exp) {
+  public void visit ( NillExp exp) {
     writeComment("Nil Exp");
-    return 0;
   }
 
-  public int visit ( TypeSpec exp) {return 0;}
+  public void visit ( TypeSpec exp) {r}
 }
