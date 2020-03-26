@@ -7,5 +7,5 @@ StocksAndBondsDigitalSigns - Assignment to create some form of digital signage
 Occular Irritation Study - Assignment to perform statistical analysis on a designed experiment
 Resume - Current Version Of My Resume (Both pdf and docx format)
 
-Compilers - This assignment is a c-- compiler. c-- is a simplified version of c. This runs on a assembly interpreter made in c. This project is still under development fixing some issues with the assembly code generation
+C-Compiler - This assignment is a c-- compiler. c-- is a simplified version of c. This runs on a assembly interpreter made in c. This project is still under development fixing some issues with the assembly code generation
 Cloud Vm Automation-  This automatically creates vms on both AWS and Azure, It currently has limited ability for what vms can be created and only AWS currently has docker functioanlity
