@@ -8,7 +8,6 @@ public class Assembler implements AssemblerVisitor {
   private int varCnt;
   private int patchCount = 0;
   private int scopeCount = 0;
-  private ArrayList<APatchLine> stack;
   private ArrayList<HashMap<String, Integer>> MapList;
   private HashMap<String, Integer> functionMap;
 
@@ -25,21 +24,6 @@ public class Assembler implements AssemblerVisitor {
   public enum Operations {HALT, IN, OUT, ADD, SUB, MUL, DIV, LD, ST, LDA, LDC, JLT, JLE, JGT, JGE, JEQ, JNE;}
 
   private List<Operations> registerOnly = Arrays.asList(Operations.HALT, Operations.IN, Operations.OUT, Operations.ADD, Operations.SUB, Operations.MUL, Operations.DIV);
-
-  // id -- unique id for backpatch, what you are looking for
-  // curInstruct -- current instruction count
-  private void checkPatchLine(String id, int curInstruct) {
-    for (int i = 0; i < stack.size(); i++) {
-      APatchLine tmp = stack.get(i);
-      // System.err.println(tmp.waitingForString);
-      if (tmp.waitingForString.compareTo(id) == 0) {
-        // System.err.println(curInstruct);
-        writeAsm(tmp.lineNum, tmp.instruction,tmp.param1,(curInstruct-tmp.lineNum-1),tmp.param3,tmp.comment);
-        stack.remove(tmp);
-        i--;
-      }
-    }
-  }
 
   //Create a new level of scope
   public void addScope() {
@@ -92,7 +76,6 @@ public class Assembler implements AssemblerVisitor {
     " 10:     LD  7,-1(5) 	return to caller\n"+
     "* End of standard prelude.");
     writeComment("");
-    stack = new ArrayList<APatchLine>();
     instructionCnt = 11;
     varCnt = 0;
     this.MapList = new ArrayList<HashMap<String,Integer>>();
@@ -109,7 +92,8 @@ public class Assembler implements AssemblerVisitor {
       //move pc to reg 0
       writeAsm(instructionCnt++, Operations.LDA, 0, 0, 7, "PC stuff");
       //move val to reg 1
-      stack.add(new APatchLine(instructionCnt++, Operations.LDC, 1, 0, temp, "Creating Offset"));
+      int instr = instructionCnt++;
+      //stack.add(new APatchLine(instructionCnt++, Operations.LDC, 1, 0, temp, "Creating Offset"));
       //add reg 1 to pc
       writeAsm(instructionCnt++, Operations.ADD, 0, 0, 1, "More PC Stuff");
       //move reg 0 to stack;
@@ -119,7 +103,8 @@ public class Assembler implements AssemblerVisitor {
       addScope();
       int lineNum = functionMap.get("main");
       writeAsm(instructionCnt++, Operations.LDA, 7, lineNum - instructionCnt, 7, "Jumping To Function Main");
-      checkPatchLine(temp, instructionCnt+1);
+      //checkPatchLine(temp, instructionCnt+1);
+      writeAsm(instr, Operations.LDC, 1, 0, 0, "Creating Offset");
       writeAsm(instructionCnt++, Operations.LD, 5, 1, 5, "load old fp");
       writeAsm(instructionCnt++, Operations.HALT, 0, 0, 0,"Halt");
   }
